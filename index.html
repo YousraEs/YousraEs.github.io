@@ -9,8 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    /* ===== Variables (une seule fois) ===== */
+    /* ===== Variables ===== */
     :root{
       --g1:#1b4332; --g2:#2d6a4f; --g3:#40916c; --g4:#52b788; --g5:#74c69d; --g6:#95d5b2;
       --bg:#0e1512; --card:#0f1c17; --muted:#bfe3d0; --text:#e9fff4; --accent:#74c69d;
@@ -149,10 +150,36 @@
     .field input:focus, .field textarea:focus, .field select:focus { box-shadow: var(--ring); border-color: rgba(255,255,255,.25) }
     .consent { display:flex; align-items:flex-start; gap:.6rem; margin-top:.2rem }
     .consent input { margin-top:.25rem; transform:translateY(1px) }
+
+    /* ======= Responsive : téléphones & petits écrans ======= */
+    @media (max-width: 720px){
+      :root { --avatar: 96px; }                  /* avatar plus petit */
+      .hero-inner{
+        grid-template-columns: 1fr;              /* une seule colonne */
+        text-align: center;
+      }
+      .avatar{ margin: 0 auto 12px; }            /* centrer la photo */
+      .meta{ justify-content: center; }
+      .cta-row{ justify-content: center; gap: .5rem; }
+      .cta-row .btn{
+        width: 100%;                             /* boutons plein largeur */
+        max-width: 420px;
+      }
+      .item{ flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 420px){
+      .cert-grid{ grid-template-columns: 1fr; }  /* 1 carte par ligne */
+      .icon-btn{ width: 38px; height: 38px; }    /* icônes plus petites */
+      .chip{ font-size: .9rem; }
+    }
+
+    /* Anti-débordement de texte */
+    p, .muted, a, .chip { overflow-wrap: anywhere; }
+    img, video { max-width: 100%; height: auto; display:block; }
   </style>
 </head>
-<body>
 
+<body>
   <!-- HERO -->
   <header class="hero">
     <div class="container hero-inner">
@@ -193,7 +220,6 @@
   </header>
 
   <main class="container">
-
     <!-- PROFIL -->
     <section class="reveal">
       <div class="grid grid-2">
@@ -362,7 +388,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
