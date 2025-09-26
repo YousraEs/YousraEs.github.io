@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ESSAMADI YOUSRA — Portfolio</title>
+  <meta name="description" content="Portfolio professionnel d'ESSAMADI YOUSRA — Développeuse Full-Stack (React & Laravel). Projets, compétences, expériences, contact." />
+  <meta name="theme-color" content="#1b4332" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --g1:#1b4332; --g2:#2d6a4f; --g3:#40916c; --g4:#52b788; --g5:#74c69d; --g6:#95d5b2;
+      --bg:#0e1512; --card:#0f1c17; --muted:#bfe3d0; --text:#e9fff4; --accent:#74c69d;
+      --ring: 0 0 0 3px rgba(116,198,157,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text); background:var(--bg);
+      overflow-x:hidden;
+    }
+    /* Animated gradient header */
+    .hero{
+      position:relative; isolation:isolate; overflow:hidden;
+      background: linear-gradient(120deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g5),var(--g6));
+      background-size: 300% 300%;
+      animation: gradShift 14s ease-in-out infinite;
+      padding: clamp(3rem, 6vw, 6rem) 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    @keyframes gradShift {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    .container{width:min(1100px, 92%); margin-inline:auto}
+
+    .hero-inner{display:grid; grid-template-columns: 130px 1fr; gap:1.25rem; align-items:center}
+    .avatar{
+      width:110px;height:110px;border-radius:50%;overflow:hidden;flex:none;
+      border:3px solid rgba(255,255,255,.9); box-shadow: var(--shadow);
+      background:#0c0c0c; display:grid; place-items:center; font-weight:800; font-size:1.6rem;
+      color:white; letter-spacing:.5px;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover; display:block}
+
+    .hero h1{margin:0; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height:1.15}
+    .hero p.role{margin:.35rem 0 0; font-weight:600}
+    .hero .meta{margin-top:.75rem; display:flex; flex-wrap:wrap; gap:.5rem 1rem; opacity:.95}
+    .chip{padding:.35rem .6rem; border-radius:999px; background: rgba(0,0,0,.18); border:1px solid rgba(255,255,255,.22); font-size:.9rem}
+
+    .cta-row{margin-top:1rem; display:flex; gap:.6rem; flex-wrap:wrap}
+    .btn{
+      appearance:none; border:0; cursor:pointer; font-weight:700; letter-spacing:.2px;
+      padding:.8rem 1rem; border-radius:12px; transition:transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      background:#0f1c17; color:var(--text); border:1px solid rgba(255,255,255,.14);
+    }
+    .btn:hover{transform: translateY(-2px); box-shadow: var(--shadow)}
+    .btn.accent{background: #103c2f; border-color: rgba(255,255,255,.22)}
+    .btn:focus{outline:none; box-shadow: var(--ring)}
+
+    /* Section */
+    section{padding: clamp(2rem, 4.5vw, 3.5rem) 0}
+    h2{
+      font-size: clamp(1.2rem,2.2vw,1.6rem);
+      margin:0 0 1rem; letter-spacing:.4px
+    }
+    .muted{color: var(--muted)}
+
+    /* Cards grid */
+    .grid{ display:grid; gap:1rem }
+    @media (min-width: 900px){ .grid-2{ grid-template-columns: 1fr 1fr } }
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: 1.1rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      position:relative; overflow:hidden;
+    }
+    .card::after{
+      content:""; position:absolute; inset:-1px; border-radius:inherit;
+      background: radial-gradient(600px 120px at var(--x,50%) var(--y,0%), rgba(116,198,157,.22), transparent 40%);
+      pointer-events:none; transition:opacity .2s ease;
+      opacity:0;
+    }
+    .card:hover::after{opacity:1}
+
+    .list{display:grid; gap:.6rem}
+    .item{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start}
+    .item p{margin:.15rem 0 0}
+:root{
+  /* ... tes variables ... */
+  --avatar: 180px; /* choisis la taille que tu veux (160/180/200) */
+}
+
+.avatar{
+  width: var(--avatar);
+  height: var(--avatar);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255,255,255,.9);
+  box-shadow: var(--shadow);
+  background:#0c0c0c;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  font-size:1.6rem;
+  color:white;
+  letter-spacing:.5px;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+
+    /* Certifications */
+    .cert-grid{
+      display:grid; gap:.75rem; grid-template-columns: repeat(2,1fr); margin-top:.75rem
+    }
+    @media (min-width: 820px){ .cert-grid{grid-template-columns: repeat(4,1fr)} }
+    .cert-card{
+      background:#0d1915; border:1px solid rgba(255,255,255,.08);
+      border-radius:14px; overflow:hidden; display:grid
+    }
+    .cert-media{aspect-ratio:4/3; overflow:hidden; display:block}
+    .cert-media img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.05)}
+    .cert-caption{padding:.5rem .6rem; font-size:.9rem}
+
+    /* Social icons */
+    .socials{display:flex; gap:.5rem; margin-left:auto}
+    .icon-btn{
+      display:inline-grid; place-items:center; width:42px; height:42px; border-radius:12px;
+      background:#0f1c17; border:1px solid rgba(255,255,255,.16); transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .icon-btn:hover{transform: translateY(-2px); box-shadow: var(--shadow); background:#0f241e}
+    .icon{width:22px;height:22px; fill:#c9ffe4}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(255,255,255,.08); padding:1.2rem 0; color:var(--muted); font-size:.95rem}
+
+    /* Scroll reveal */
+    .reveal{opacity:0; transform: translateY(14px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:none}
+
+    /* Little header meteors (pure CSS, moved by JS) */
+    .meteor{
+      position:absolute; width:2px; height:2px; background: white; border-radius:50%; opacity:.65; filter: blur(.2px);
+    }
+
+    /* ====== Styles du formulaire ====== */
+    .field { display:grid; gap:.35rem }
+    .field input, .field textarea, .field select {
+      width:100%; padding:.8rem .9rem; border-radius:12px;
+      background:#0f1c17; color:var(--text);
+      border:1px solid rgba(255,255,255,.14);
+      outline:none; transition: box-shadow .15s ease, border-color .15s ease;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      box-shadow: var(--ring); border-color: rgba(255,255,255,.25)
+    }
+    .consent { display:flex; align-items:flex-start; gap:.6rem; margin-top:.2rem }
+    .consent input { margin-top:.25rem; transform:translateY(1px) }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="avatar" id="avatar">
+        <!-- Fallback initials if image missing -->
+        <span id="initials" aria-hidden="true" style="display:none">YE</span>
+        <img id="avatarImg" src="img/yousra.jpg" alt="Photo de profil de Yousra" onerror="this.style.display='none';document.getElementById('initials').style.display='grid';">
+      </div>
+      <div>
+        <h1>ESSAMADI YOUSRA</h1>
+        <p class="role">Full-Stack Developer — React & Laravel</p>
+        <div class="meta">
+          <span class="chip">Tetouan, MA</span>
+          <span class="chip">+212 7 67 73 12 48</span>
+          <span class="chip">essamadiyousra19@gmail.com</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn accent" href="cv/cvyousra.pdf" target="_blank" rel="noreferrer noopener">Télécharger CV</a>
+
+          
+          <span class="socials" aria-label="Réseaux">
+            <a class="icon-btn" href="https://www.linkedin.com/in/yousra-essamadi/" target="_blank" rel="noreferrer noopener" title="LinkedIn">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.8v2.1h.05c.53-1 1.83-2.1 3.77-2.1 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7c0-1.67-.03-3.82-2.33-3.82-2.34 0-2.7 1.82-2.7 3.7V24h-4V8.5z"/></svg>
+            </a>
+            <a class="icon-btn" href="https://github.com/YousraEs" target="_blank" rel="noreferrer noopener" title="GitHub">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.35-1.78-1.35-1.78-1.11-.76.09-.75.09-.75 1.22.09 1.86 1.26 1.86 1.26 1.09 1.86 2.86 1.32 3.56 1.01.11-.79.42-1.32.77-1.62-2.66-.3-5.47-1.33-5.47-5.9 0-1.3.47-2.36 1.25-3.19-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.31 1.22a11.5 11.5 0 0 1 6.02 0c2.3-1.54 3.31-1.22 3.31-1.22.66 1.65.25 2.87.12 3.17.78.83 1.25 1.89 1.25 3.19 0 4.58-2.82 5.59-5.5 5.89.43.37.82 1.1.82 2.23V23.3c0 .32.21.7.83.58A12 12 0 0 0 12 .5z"/></svg>
+            </a>
+            <a class="icon-btn" href="mailto:essamadiyousra19@gmail.com" title="Envoyer un e-mail">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v.4l10 6.25L22 6.4V6a2 2 0 0 0-2-2zm2 5.2-9.35 5.83a1.5 1.5 0 0 1-1.3 0L2 9.2V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.2z"/></svg>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- decorative meteors -->
+    <div id="meteors"></div>
+  </header>
+
+  <main class="container">
+
+    <!-- PROFIL -->
+    <section class="reveal">
+      <div class="grid grid-2">
+        <article class="card">
+          <h2>Profil</h2>
+          <p class="muted">
+            Junior Web Developer avec un diplôme Bac+2 en Développement Digital (React &amp; Laravel) et une formation en Infographie.
+            Compétences front-end (HTML, CSS, JavaScript, React) et back-end (Laravel, MongoDB, MySQL).
+            Motivée, rapide d’apprentissage, et prête à évoluer au sein d’une équipe internationale.
+          </p>
+        </article>
+        <article class="card">
+          <h2>Compétences techniques</h2>
+          <div class="list">
+            <div class="item"><b>Front-end</b><p class="muted">HTML5, CSS3, JavaScript (ES6+), React.js, Bootstrap</p></div>
+            <div class="item"><b>Back-end</b><p class="muted">PHP (Laravel)</p></div>
+            <div class="item"><b>Bases de données</b><p class="muted">MongoDB, MySQL</p></div>
+            <div class="item"><b>Outils</b><p class="muted">Git, REST APIs, Canva, Adobe Photoshop, Illustrator, InDesign</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section class="reveal">
+      <div class="card">
+        <h2>Projets académiques & personnels</h2>
+        <div class="list">
+          <div class="item">
+            <div>
+              <b>School Management Web App (React + Laravel)</b>
+              <p class="muted">Inscription des étudiants, gestion des enseignants et des cours, interface responsive.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div>
+              <b>Billing Application (Laravel + MySQL)</b>
+              <p class="muted">Gestion automatisée des clients, produits et factures avec authentification.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div>
+              <b>Feedback Application (React)</b>
+              <p class="muted">Collecte et gestion des retours utilisateurs avec notes et interface responsive.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUC / LANG -->
+    <section class="reveal">
+      <div class="grid grid-2">
+        <article class="card">
+          <h2>Éducation</h2>
+          <div class="list">
+            <div class="item"><b>DTS – Développement Digital (Bac+2)</b><p class="muted">React, Laravel, MySQL</p></div>
+            <div class="item"><b>Infographie (1 an)</b><p class="muted">Adobe Suite — Photoshop, Illustrator, InDesign</p></div>
+          </div>
+        </article>
+        <article class="card">
+          <h2>Langues</h2>
+          <div class="list">
+            <div class="item"><b>Français</b><p class="muted">Bonne maîtrise professionnelle</p></div>
+            <div class="item"><b>Anglais</b><p class="muted">Intermédiaire</p></div>
+            <div class="item"><b>Arabe</b><p class="muted">Natif</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="reveal">
+      <div class="card">
+        <h2>Certifications</h2>
+        <div class="cert-grid">
+          <!-- attention: dossier 'certication/' (orthographe identique côté fichiers) -->
+          <figure class="cert-card">
+            <a class="cert-media" href="certication/cybersecurity.jpg" target="_blank" rel="noreferrer noopener">
+              <img src="certication/cybersecurity.jpg" alt="Introduction to Cybersecurity — Cisco (2025)" loading="lazy">
+            </a>
+            <figcaption class="cert-caption muted">Introduction to Cybersecurity — Cisco (2025)</figcaption>
+          </figure>
+
+          <figure class="cert-card">
+            <a class="cert-media" href="certication/certyfpython.jpg" target="_blank" rel="noreferrer noopener">
+              <img src="certication/certyfpython.jpg" alt="Python Essentials 1 — AIoT Club School (2024)" loading="lazy">
+            </a>
+            <figcaption class="cert-caption muted">Python Essentials 1 — AIoT Club School (2024)</figcaption>
+          </figure>
+
+          <figure class="cert-card">
+            <a class="cert-media" href="certication/certiftruningjava.jpg" target="_blank" rel="noreferrer noopener">
+              <img src="certication/certiftruningjava.jpg" alt="Java Fundamentals — InfoTech Club (2024)" loading="lazy">
+            </a>
+            <figcaption class="cert-caption muted">Java Fundamentals — InfoTech Club (2024)</figcaption>
+          </figure>
+
+          <figure class="cert-card">
+            <a class="cert-media" href="certication/createownstatup.jpg" target="_blank" rel="noreferrer noopener">
+              <img src="certication/createownstatup.jpg" alt="Create Your Own Startup — Workshop" loading="lazy">
+            </a>
+            <figcaption class="cert-caption muted">Create Your Own Startup — Workshop</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (formulaire usager + liens) -->
+    <section class="reveal">
+      <div class="card">
+        <h2>Contact</h2>
+
+        <!-- Formulaire usager (Formspree) -->
+        <form id="contactForm" class="list" action="https://formspree.io/f/xqayarvz" method="POST" novalidate>
+          <!-- Sujet email côté Formspree -->
+          <input type="hidden" name="_subject" value="Nouveau message depuis le Portfolio d'ESSAMADI YOUSRA">
+          <!-- Redirection optionnelle après envoi (laissée vide car gérée en JS) -->
+          <input type="hidden" name="_redirect" value="">
+          <!-- Anti-bot honeypot -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <label class="field">
+            <b>Nom complet</b>
+            <input type="text" name="name" placeholder="Ex. Mohamed Ali" required>
+          </label>
+
+          <label class="field">
+            <b>E-mail</b>
+            <input type="email" name="email" placeholder="nom@entreprise.com" required>
+          </label>
+
+          <label class="field">
+            <b>Sujet</b>
+            <select name="topic" required>
+              <option value="" selected disabled>Choisir un sujet</option>
+              <option>Opportunité d’emploi</option>
+              <option>Projet freelance</option>
+              <option>Stage / Alternance</option>
+              <option>Autre</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <b>Message</b>
+            <textarea name="message" rows="5" placeholder="Bonjour Yousra, ..." required></textarea>
+          </label>
+
+          <!-- Permet à Formspree d’utiliser l’email en reply-to -->
+          <input type="hidden" name="_replyto" value="">
+
+          <label class="consent">
+            <input type="checkbox" id="consent" required>
+            <span class="muted">J’accepte que mes informations soient utilisées pour répondre à ma demande.</span>
+          </label>
+
+          <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap">
+            <button type="submit" class="btn accent" id="sendBtn">Envoyer</button>
+            <small class="muted">ou par e-mail&nbsp;: <a class="btn"
+   href="https://mail.google.com/mail/?view=cm&fs=1&to=essamadiyousra19@gmail.com&su=Contact%20%E2%80%94%20ESSAMADI%20YOUSRA&body=Bonjour%20Yousra,%0D%0A%0D%0A"
+   target="_blank" rel="noreferrer noopener">
+  Me contacter
+</a>
+</small>
+          </div>
+
+          <p id="formMsg" class="muted" aria-live="polite" style="margin:.6rem 0 0; display:none"></p>
+        </form>
+
+        <!-- Liens (conservés) -->
+        <div class="list" style="margin-top:1rem">
+          <div class="item"><b>LinkedIn</b><p><a class="muted" href="https://www.linkedin.com/in/yousra-essamadi/" target="_blank" rel="noreferrer noopener">linkedin.com/in/yousra-essamadi</a></p></div>
+          <div class="item"><b>GitHub</b><p><a class="muted" href="https://github.com/YousraEs" target="_blank" rel="noreferrer noopener">github.com/YousraEs</a></p></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> ESSAMADI YOUSRA — Portfolio.</div>
+  </footer>
+
+  <script>
+    // 1) Scroll reveal
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); }
+      })
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    // 2) Card glow cursor tracking
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('mousemove', (e)=>{
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--x', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--y', (e.clientY - r.top) + 'px');
+      });
+    });
+
+    // 3) Animated header meteors (decorative, lightweight)
+    const meteorWrap = document.getElementById('meteors');
+    const hero = document.querySelector('.hero');
+    function spawnMeteor(){
+      const m = document.createElement('span');
+      m.className = 'meteor';
+      const w = hero.clientWidth, h = hero.clientHeight;
+      const startX = Math.random()*w, startY = -10;
+      const endX = startX + (Math.random()*120-60);
+      const endY = h + 20;
+      const dur = 2500 + Math.random()*2000;
+      m.style.left = startX+'px'; m.style.top = startY+'px';
+      meteorWrap.appendChild(m);
+      m.animate([{transform:`translate(0,0)`,opacity:.8},{transform:`translate(${endX-startX}px,${endY-startY}px)`,opacity:0}], {duration:dur, easing:'linear'});
+      setTimeout(()=>m.remove(), dur);
+    }
+    setInterval(spawnMeteor, 1200);
+
+    // 4) Gradient shift booster on wheel (petit effet "creative JS event")
+    hero.addEventListener('wheel', ()=>{
+      hero.style.animation = 'none';
+      setTimeout(()=>{ hero.style.animation = ''; }, 10);
+    }, {passive:true});
+
+    // 5) Year + initials fallback
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const initials = document.getElementById('initials');
+    if(initials && initials.style.display==='grid'){
+      document.getElementById('avatar').style.background = 'linear-gradient(135deg,#2d6a4f,#74c69d)';
+    }
+
+    // 6) Formspree — envoi sans rechargement + feedback
+    (function(){
+      const form = document.getElementById('contactForm');
+      if(!form) return;
+      const msg = document.getElementById('formMsg');
+      const btn = document.getElementById('sendBtn');
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+
+        // Bloque si consentement non coché
+        const consent = document.getElementById('consent');
+        if(!consent || !consent.checked){
+          show('Merci de cocher la case de consentement.');
+          return;
+        }
+
+        // Renseigne _replyto avec l'email saisi
+        const emailInput = form.querySelector('input[name="email"]');
+        const replyTo = form.querySelector('input[name="_replyto"]');
+        if(emailInput && replyTo) replyTo.value = emailInput.value;
+
+        btn.disabled = true; btn.textContent = 'Envoi...';
+
+        try{
+          const data = new FormData(form);
+          const res = await fetch(form.action, {
+            method:'POST',
+            headers:{ 'Accept':'application/json' },
+            body:data
+          });
+
+          if(res.ok){
+            form.reset();
+            show('Message envoyé ✔️ Je vous répondrai rapidement.');
+          }else{
+            const j = await res.json().catch(()=>null);
+            const err = j && j.errors ? j.errors.map(e=>e.message).join(', ') : 'Une erreur est survenue.';
+            show('Échec de l’envoi : ' + err + ' — vous pouvez aussi écrire à : essamadiyousra19@gmail.com');
+          }
+        }catch(ex){
+          show('Impossible d’envoyer pour le moment. Essayez par e-mail direct.');
+        }finally{
+          btn.disabled = false; btn.textContent = 'Envoyer';
+        }
+      });
+
+      function show(text){
+        if(!msg) return;
+        msg.textContent = text;
+        msg.style.display = 'block';
+      }
+    })();
+  </script>
+</body>
+</html>
